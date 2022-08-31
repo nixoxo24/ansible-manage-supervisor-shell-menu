@@ -1,0 +1,9 @@
+---
+- name: supervisor status
+  hosts: all
+  become: true
+  tasks:
+    - name: supervisor status
+      shell: "systemctl status supervisord"
+      register: status
+    - debug: var=status.stdout_lines

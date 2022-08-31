@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: supervisor start
+      shell: "systemctl start supervisord"
+      register: status
+    - debug: var=status.stdout_lines
+
+    - name: get status of supervisor after the restart
+      shell: "systemctl status supervisord"
+      register: status
+    - debug: var=status.stdout_lines
